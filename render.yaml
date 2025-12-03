@@ -5,7 +5,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    region: frankfurt
+    region: oregon
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
