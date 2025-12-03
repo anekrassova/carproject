@@ -19,6 +19,13 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Map<String, String> request) {
         try {
+            System.out.println("===== REGISTER REQUEST RECEIVED =====");
+            System.out.println("Request body:");
+            System.out.println("username = " + request.get("username"));
+            System.out.println("email = " + request.get("email"));
+            System.out.println("password = " + request.get("password"));
+            System.out.println("=====================================");
+
             User user = authService.register(request.get("username"), request.get("email"), request.get("password"));
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Пользователь успешно зарегистрирован");
@@ -32,6 +39,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
         try {
+            System.out.println("===== LOGIN REQUEST RECEIVED =====");
+            System.out.println("Request body:");
+            System.out.println("email = " + request.get("email"));
+            System.out.println("password = " + request.get("password"));
+            System.out.println("=====================================");
+
             String token = authService.login(request.get("email"), request.get("password"));
             Map<String, Object> response = new HashMap<>();
             response.put("token", token);
