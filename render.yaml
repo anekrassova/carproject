@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: spring-backend
+    runtime: java
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    region: frankfurt
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
