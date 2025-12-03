@@ -35,18 +35,23 @@ public class AuthService {
     }
 
     public User register(String username, String email, String password) {
+
+        Role defaultRole = roleRepository.findByRoleName("USER")
+                .orElseGet(() -> {
+                    Role r = new Role();
+                    r.setRoleName("USER");
+                    return roleRepository.save(r);
+                });
+
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-
-        Role defaultRole = roleRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Роль не найдена"));
-
         user.setRole(defaultRole);
 
         return userRepository.save(user);
     }
+
 
     public String login(String email, String password) throws Exception {
         Optional<User> user = userRepository.findByEmail(email);
